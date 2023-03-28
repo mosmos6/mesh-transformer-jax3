@@ -19,8 +19,7 @@ from smart_open import open
 from mesh_transformer.util import clip_by_global_norm
 
 from flask import Flask, request, make_response, jsonify
-import os.path #added on 28march
-os.environ.pop('LD_PRELOAD', None) #added on 28march
+
 app = Flask(__name__)
 
 
