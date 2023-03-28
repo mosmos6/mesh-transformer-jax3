@@ -17,7 +17,6 @@ from mesh_transformer.layers import EmbeddingShard, TransformerLayerShard, Relat
 from mesh_transformer.util import to_f32, to_bf16, maybe_shard, head_print, global_norm
 from jax.experimental import PartitionSpec as P
 
-#This is the original shard py
 
 class CausalTransformerShard(hk.Module):
     def __init__(self, config):
@@ -227,7 +226,7 @@ class CausalTransformer:
                                                              ["batch", ...],
                                                              ["batch", ...],
                                                              ["batch", ...]),
-                                                    out_axes=["batch", ...],
+                                                    out_axes=(["batch", ...], ["shard", ...]),
                                                     axis_resources={'shard': 'mp', 'batch': 'dp'})
 
         self.train_xmap = jax.experimental.maps.xmap(fun=train,
